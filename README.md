@@ -1,62 +1,62 @@
 # AuthPerfisApi – API Minimal com Autenticação e Perfis de Acesso
 
-Este projeto é uma API Minimal desenvolvida em *ASP.NET Core*, criada para demonstrar conceitos essenciais de autenticação simples, perfis de acesso (Admin/User),
-validação de login e proteção de rotas utilizando middleware personalizado.
+Este projeto apresenta uma API Minimal desenvolvida em **ASP.NET Core**, implementando autenticação simples, perfis de acesso (Admin/User), login com token fake (GUID), 
+hash de senha usando SHA256 e um middleware personalizado para proteção de rotas.  
 
----
+## 🚀 Funcionalidades
 
-# Funcionalidades
-- **Cadastro de usuário** (`POST /usuarios`)
-  - Nome, Email, SenhaHash e Perfil (Admin/User)
-  - Validação de senha mínima (6 caracteres)
-  - Verificação de e-mail duplicado
-  - Geração automática de ID
-  - 
-- **Login com token fake** (`POST /login`)
-  - Gera um GUID como token
-  - Token armazenado em memória
-  - Senha comparada via **hash SHA256**
+- **Cadastro de usuários** (`POST /usuarios`)
+  - Nome, Email, Senha (com hash) e Perfil (Admin/User)
+  - Validações completas (campos obrigatórios, senha mínima, e-mail duplicado)
 
-- **Proteção de rotas via middleware**
-  - `GET /usuarios` só pode ser acessado se enviar o header:
-    ```
-    X-Perfil: Admin
-    
+- **Login** (`POST /login`)
+  - Validação de credenciais
+  - Geração de token fake (GUID)
+  - Armazenamento dos tokens em memória
+
+- **Proteção de rotas**
+  - Middleware que exige `X-Perfil: Admin` para acessar rotas administrativas
+  - Exemplo: `GET /usuarios`
+
 - **Armazenamento em memória**
   - Lista de usuários
   - Dicionário de tokens
 
-# Fluxo de Autenticação
+---
 
-1. O usuário se registra em `/usuarios`
-2. A senha é convertida para hash SHA256
-3. O login é feito em `/login`
-4. Se os dados estiverem corretos, um token fake (GUID) é gerado
-5. Rotas protegidas exigem header indicando o perfil do usuário
-6. 
-# Tecnologias Utilizadas
+## 🔐 Fluxo de Autenticação
 
-- ASP.NET Core Minimal API
-- C#
-- SHA256 para hashing de senha
-- Middleware customizado
-- DTOs (Data Transfer Objects)
-- Validações e boas práticas de backend
+1. O usuário se registra em `/usuarios`.
+2. A senha é convertida em hash SHA256.
+3. O usuário faz login em `/login`.
+4. Se válido, recebe um token fake (GUID).
+5. Rotas protegidas exigem envio do header:
 
-## 📌 Como Rodar o Projeto
 
-1️ Clone o repositório
+---
+
+## 🛠 Tecnologias Utilizadas
+
+- ASP.NET Core Minimal API  
+- C#  
+- SHA256 para hashing  
+- Middleware customizado  
+- DTOs e boas práticas de API
+- 
+## Como Rodar o Projeto
+1. Clone o repositório:
+```bash
 git clone https://github.com/CaioL-eandro/AuthPerfisApi.git
 
-2️ Acesse a pasta do projeto
+Acesse o diretório:
+
 cd AuthPerfisApi
 
-3️ Execute a aplicação
+Execute:
+
 dotnet run
 
-4️ Acesse o Swagger no navegador
+Acesse o Swagger:
+
 https://localhost:7058/swagger
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/CaioL-eandro/AuthPerfisApi.gi
